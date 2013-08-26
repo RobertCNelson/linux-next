@@ -31,7 +31,7 @@ KERNEL_REL=3.11
 KERNEL_TAG=${KERNEL_REL}-rc6
 BUILD=d0
 
-tag="20130820"
+tag="20130822"
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
