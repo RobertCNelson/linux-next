@@ -25,11 +25,11 @@ config="multi_v7_defconfig"
 linaro_toolchain="cortex_gcc_4_8"
 
 #Kernel/Build
-KERNEL_REL=3.11
-KERNEL_TAG=${KERNEL_REL}-rc7
+KERNEL_REL=3.12
+KERNEL_TAG=${KERNEL_REL}-rc2
 BUILD=d0
 
-tag="20130830"
+tag="20130927"
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
