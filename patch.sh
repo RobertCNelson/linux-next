@@ -24,8 +24,7 @@
 
 git="git am"
 
-git_patchset="git://gitorious.org/thierryreding/linux-next.git"
-#git_patchset="git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
+git_patchset="git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
 if [ -f ${DIR}/system.sh ] ; then
 	. ${DIR}/system.sh
 	if [ "${GIT_OVER_HTTP}" ] ; then
@@ -60,7 +59,6 @@ cleanup () {
 next () {
 	echo "pulling: next-${tag}"
 	git pull ${GIT_OPTS} ${git_patchset} next-${tag}
-#	git pull ${GIT_OPTS} https://github.com/pantoniou/linux-beagle-track-mainline.git merge-${tag}
 }
 
 next
