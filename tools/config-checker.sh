@@ -14,11 +14,18 @@ check_config_builtin () {
 
 check_config_module () {
 	unset test_config
-	test_config=$(grep "${config}=" ${DIR}/patches/defconfig || true)
-	if [ "x${test_config}" = "x" ] ; then
+	test_config=$(grep "${config}=y" ${DIR}/patches/defconfig || true)
+	if [ "x${test_config}" = "x${config}=y" ] ; then
 		echo "------------------------------------"
-		echo "Config: [${config}] not enabled"
-		echo "echo ${config}=m >> ./KERNEL/.config"
+		echo "sed -i -e 's:${config}=y:${config}=m:g' ./KERNEL/.config"
+	else
+		unset test_config
+		test_config=$(grep "${config}=" ${DIR}/patches/defconfig || true)
+		if [ "x${test_config}" = "x" ] ; then
+			echo "------------------------------------"
+			echo "Config: [${config}] not enabled"
+			echo "echo ${config}=m >> ./KERNEL/.config"
+		fi
 	fi
 }
 
@@ -128,11 +135,11 @@ if_config="CONFIG_ARCH_MULTI_V7"
 config="CONFIG_KERNEL_MODE_NEON"
 check_if_set_then_set
 
+if_config="CONFIG_ARCH_MULTI_V7"
 config="CONFIG_XFS_FS"
-check_config_builtin
-
+check_if_set_then_set
 config="CONFIG_BTRFS_FS"
-check_config_builtin
+check_if_set_then_set
 
 config="CONFIG_MSDOS_FS"
 check_config_builtin
@@ -195,4 +202,7 @@ check_config_builtin
 config="CONFIG_ZRAM"
 check_config_module
 
+#ancient...
+config="CONFIG_OABI_COMPAT"
+check_config_disabled
 #
