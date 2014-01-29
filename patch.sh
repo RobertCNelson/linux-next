@@ -59,6 +59,9 @@ cleanup () {
 next () {
 	echo "pulling: next-${tag}"
 	git pull ${GIT_OPTS} ${git_patchset} next-${tag}
+
+	#${git} "${DIR}/patches/wip/0001-ARM-dts-split-omap3-beagle-xm-onto-omap3-beagle-xm-c.patch"
+	#${git} "${DIR}/patches/wip/0002-ARM-dts-add-omap3-beagle-xm-ab-based-on-revision-c-b.patch"
 }
 
 next
