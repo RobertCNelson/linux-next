@@ -139,6 +139,8 @@ config="CONFIG_ARM_ERRATA_430973"
 check_if_set_then_set
 config="CONFIG_PINCTRL_SINGLE"
 check_if_set_then_set
+config="CONFIG_THUMB2_KERNEL"
+check_if_set_then_disable
 
 if_config="CONFIG_ARCH_MULTI_V7"
 config="CONFIG_SMP"
@@ -147,11 +149,13 @@ config="CONFIG_SMP_ON_UP"
 check_if_set_then_set
 config="CONFIG_SWP_EMULATE"
 check_if_set_then_set
-config="CONFIG_THUMB2_KERNEL"
-check_if_set_then_set
+#config="CONFIG_THUMB2_KERNEL"
+#check_if_set_then_set
 
 if_config="CONFIG_ARCH_MULTI_V7"
 config="CONFIG_KERNEL_MODE_NEON"
+check_if_set_then_set
+config="CONFIG_SOC_DRA7XX"
 check_if_set_then_set
 
 if_config="CONFIG_ARCH_MULTI_V7"
