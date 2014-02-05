@@ -296,14 +296,8 @@ check_config_builtin
 
 #
 # Multimedia core support
-##
-# Multimedia core support
 #
 
-config="CONFIG_MEDIA_CONTROLLER"
-check_config_builtin
-config="CONFIG_VIDEO_V4L2_SUBDEV_API"
-check_config_builtin
 config="CONFIG_MEDIA_CONTROLLER"
 check_config_builtin
 config="CONFIG_VIDEO_V4L2_SUBDEV_API"
