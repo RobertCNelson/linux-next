@@ -132,8 +132,6 @@ check_config_disable
 #
 # OMAP Feature Selections
 #
-config="CONFIG_SOC_DRA7XX"
-check_config_builtin
 config="CONFIG_ARCH_ROCKCHIP"
 check_config_disable
 config="CONFIG_ARCH_SOCFPGA"

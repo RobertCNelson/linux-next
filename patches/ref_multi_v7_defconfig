@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.14.0-rc1 Kernel Configuration
+# Linux/arm 3.14.0-rc2 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_MIGHT_HAVE_PCI=y
@@ -390,7 +390,7 @@ CONFIG_ARCH_OMAP4=y
 CONFIG_SOC_OMAP5=y
 CONFIG_SOC_AM33XX=y
 CONFIG_SOC_AM43XX=y
-# CONFIG_SOC_DRA7XX is not set
+CONFIG_SOC_DRA7XX=y
 CONFIG_ARCH_OMAP2PLUS=y
 
 #
