@@ -384,8 +384,6 @@ config="CONFIG_TWL6030_USB"
 check_config_module
 config="CONFIG_USB_GADGET"
 check_config_builtin
-config="CONFIG_MMC_UNSAFE_RESUME"
-check_config_builtin
 
 #
 # USB Peripheral Controller
@@ -520,9 +518,5 @@ check_config_builtin
 #
 config="CONFIG_SCHEDSTATS"
 check_config_builtin
-
-echo "#Bugs:"
-config="CONFIG_DRM_IMX_HDMI"
-check_config_disable
 
 #
