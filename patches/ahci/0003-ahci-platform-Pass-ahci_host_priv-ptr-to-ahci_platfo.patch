@@ -1,0 +1,133 @@
+From 3e80b9ef1ba5b2dd117dc411ff94be79736a0f7c Mon Sep 17 00:00:00 2001
+From: Hans de Goede <hdegoede@redhat.com>
+Date: Wed, 19 Feb 2014 13:01:45 +0100
+Subject: [PATCH 03/17] ahci-platform: Pass ahci_host_priv ptr to
+ ahci_platform_data init method
+
+Some ahci_platform_data->init methods need access to the ahci_host_priv data.
+
+When calling ahci_platform_data->init the ata_host has not been allocated yet,
+so access to ahci_host_priv through the dev argument is not possible.
+
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+---
+ arch/arm/mach-davinci/devices-da8xx.c |  5 +++--
+ arch/arm/mach-spear/spear1340.c       |  2 +-
+ drivers/ata/ahci_imx.c                | 12 ++++++------
+ drivers/ata/ahci_platform.c           |  2 +-
+ include/linux/ahci_platform.h         |  3 ++-
+ 5 files changed, 13 insertions(+), 11 deletions(-)
+
+diff --git a/arch/arm/mach-davinci/devices-da8xx.c b/arch/arm/mach-davinci/devices-da8xx.c
+index 0486cdf..c4e97da 100644
+--- a/arch/arm/mach-davinci/devices-da8xx.c
++++ b/arch/arm/mach-davinci/devices-da8xx.c
+@@ -14,6 +14,7 @@
+ #include <linux/platform_device.h>
+ #include <linux/dma-contiguous.h>
+ #include <linux/serial_8250.h>
++#include <linux/ahci.h>
+ #include <linux/ahci_platform.h>
+ #include <linux/clk.h>
+ #include <linux/reboot.h>
+@@ -1061,7 +1062,7 @@ static unsigned long da850_sata_xtal[] = {
+ 	KHZ_TO_HZ(60000),
+ };
+ 
+-static int da850_sata_init(struct device *dev, void __iomem *addr)
++static int da850_sata_init(struct device *dev, struct ahci_host_priv *hpriv)
+ {
+ 	int i, ret;
+ 	unsigned int val;
+@@ -1096,7 +1097,7 @@ static int da850_sata_init(struct device *dev, void __iomem *addr)
+ 		SATA_PHY_TXSWING(3) |
+ 		SATA_PHY_ENPLL(1);
+ 
+-	__raw_writel(val, addr + SATA_P0PHYCR_REG);
++	__raw_writel(val, hpriv->mmio + SATA_P0PHYCR_REG);
+ 
+ 	return 0;
+ 
+diff --git a/arch/arm/mach-spear/spear1340.c b/arch/arm/mach-spear/spear1340.c
+index 3fb6834..9e2f3ac 100644
+--- a/arch/arm/mach-spear/spear1340.c
++++ b/arch/arm/mach-spear/spear1340.c
+@@ -77,7 +77,7 @@
+ 			SPEAR1340_MIPHY_PLL_RATIO_TOP(25))
+ 
+ /* SATA device registration */
+-static int sata_miphy_init(struct device *dev, void __iomem *addr)
++static int sata_miphy_init(struct device *dev, struct ahci_host_priv *hpriv)
+ {
+ 	writel(SPEAR1340_SATA_CFG_VAL, SPEAR1340_PCIE_SATA_CFG);
+ 	writel(SPEAR1340_PCIE_SATA_MIPHY_CFG_SATA_25M_CRYSTAL_CLK,
+diff --git a/drivers/ata/ahci_imx.c b/drivers/ata/ahci_imx.c
+index dd4d6f7..ebfd1d6 100644
+--- a/drivers/ata/ahci_imx.c
++++ b/drivers/ata/ahci_imx.c
+@@ -168,7 +168,7 @@ static const struct ata_port_info ahci_imx_port_info = {
+ 	.port_ops	= &ahci_imx_ops,
+ };
+ 
+-static int imx_sata_init(struct device *dev, void __iomem *mmio)
++static int imx_sata_init(struct device *dev, struct ahci_host_priv *hpriv)
+ {
+ 	int ret = 0;
+ 	unsigned int reg_val;
+@@ -185,19 +185,19 @@ static int imx_sata_init(struct device *dev, void __iomem *mmio)
+ 	 * Implement the port0.
+ 	 * Get the ahb clock rate, and configure the TIMER1MS register.
+ 	 */
+-	reg_val = readl(mmio + HOST_CAP);
++	reg_val = readl(hpriv->mmio + HOST_CAP);
+ 	if (!(reg_val & HOST_CAP_SSS)) {
+ 		reg_val |= HOST_CAP_SSS;
+-		writel(reg_val, mmio + HOST_CAP);
++		writel(reg_val, hpriv->mmio + HOST_CAP);
+ 	}
+-	reg_val = readl(mmio + HOST_PORTS_IMPL);
++	reg_val = readl(hpriv->mmio + HOST_PORTS_IMPL);
+ 	if (!(reg_val & 0x1)) {
+ 		reg_val |= 0x1;
+-		writel(reg_val, mmio + HOST_PORTS_IMPL);
++		writel(reg_val, hpriv->mmio + HOST_PORTS_IMPL);
+ 	}
+ 
+ 	reg_val = clk_get_rate(imxpriv->ahb_clk) / 1000;
+-	writel(reg_val, mmio + HOST_TIMER1MS);
++	writel(reg_val, hpriv->mmio + HOST_TIMER1MS);
+ 
+ 	return 0;
+ }
+diff --git a/drivers/ata/ahci_platform.c b/drivers/ata/ahci_platform.c
+index 9302d81..885269d 100644
+--- a/drivers/ata/ahci_platform.c
++++ b/drivers/ata/ahci_platform.c
+@@ -148,7 +148,7 @@ static int ahci_probe(struct platform_device *pdev)
+ 	 * returned successfully.
+ 	 */
+ 	if (pdata && pdata->init) {
+-		rc = pdata->init(dev, hpriv->mmio);
++		rc = pdata->init(dev, hpriv);
+ 		if (rc)
+ 			goto disable_unprepare_clk;
+ 	}
+diff --git a/include/linux/ahci_platform.h b/include/linux/ahci_platform.h
+index 73a2500..737fe38 100644
+--- a/include/linux/ahci_platform.h
++++ b/include/linux/ahci_platform.h
+@@ -19,9 +19,10 @@
+ 
+ struct device;
+ struct ata_port_info;
++struct ahci_host_priv;
+ 
+ struct ahci_platform_data {
+-	int (*init)(struct device *dev, void __iomem *addr);
++	int (*init)(struct device *dev, struct ahci_host_priv *hpriv);
+ 	void (*exit)(struct device *dev);
+ 	int (*suspend)(struct device *dev);
+ 	int (*resume)(struct device *dev);
+-- 
+1.8.5.3
+

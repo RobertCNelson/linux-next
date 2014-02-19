@@ -221,6 +221,14 @@ check_config_module
 # CONFIG_ZRAM_DEBUG is not set
 
 #
+# Controllers with non-SFF native interface
+#
+config="CONFIG_SATA_AHCI_PLATFORM"
+check_config_builtin
+config="CONFIG_AHCI_IMX"
+check_config_builtin
+
+#
 # SPI Protocol Masters
 #
 config="CONFIG_SPI_SPIDEV"

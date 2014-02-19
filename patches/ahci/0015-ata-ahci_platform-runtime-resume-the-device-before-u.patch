@@ -1,0 +1,70 @@
+From 9079371a44621453d51ed791aab95c968dd14044 Mon Sep 17 00:00:00 2001
+From: Roger Quadros <rogerq@ti.com>
+Date: Wed, 19 Feb 2014 13:01:57 +0100
+Subject: [PATCH 15/17] ata: ahci_platform: runtime resume the device before
+ use
+
+On OMAP platforms the device needs to be runtime resumed before
+it can be accessed. The OMAP HWMOD framework takes care of
+enabling the module and its resources based on the
+device's runtime PM state.
+
+In this patch we runtime resume during .probe() and runtime suspend
+during .remove() (i.e. ahci_host_stop()).
+
+We also update the runtime PM state during .resume().
+
+CC: Balaji T K <balajitk@ti.com>
+Signed-off-by: Roger Quadros <rogerq@ti.com>
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+---
+ drivers/ata/ahci_platform.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/drivers/ata/ahci_platform.c b/drivers/ata/ahci_platform.c
+index 8b18923..16bc7fd 100644
+--- a/drivers/ata/ahci_platform.c
++++ b/drivers/ata/ahci_platform.c
+@@ -23,6 +23,7 @@
+ #include <linux/libata.h>
+ #include <linux/ahci_platform.h>
+ #include <linux/phy/phy.h>
++#include <linux/pm_runtime.h>
+ #include "ahci.h"
+ 
+ static void ahci_host_stop(struct ata_host *host);
+@@ -233,6 +234,9 @@ struct ahci_host_priv *ahci_platform_get_resources(
+ 		}
+ 	}
+ 
++	pm_runtime_enable(dev);
++	pm_runtime_get_sync(dev);
++
+ 	return hpriv;
+ 
+ free_clk:
+@@ -247,6 +251,9 @@ void ahci_platform_put_resources(struct device *dev,
+ {
+ 	int c;
+ 
++	pm_runtime_put_sync(dev);
++	pm_runtime_disable(dev);
++
+ 	for (c = 0; c < AHCI_MAX_CLKS && hpriv->clks[c]; c++)
+ 		clk_put(hpriv->clks[c]);
+ }
+@@ -479,6 +486,11 @@ int ahci_platform_resume(struct device *dev)
+ 	if (rc)
+ 		goto disable_resources;
+ 
++	/* We resumed so update PM runtime state */
++	pm_runtime_disable(dev);
++	pm_runtime_set_active(dev);
++	pm_runtime_enable(dev);
++
+ 	return 0;
+ 
+ disable_resources:
+-- 
+1.8.5.3
+
