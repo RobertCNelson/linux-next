@@ -172,7 +172,7 @@ ahci () {
 	${git} "${DIR}/patches/ahci/0015-ata-ahci_platform-runtime-resume-the-device-before-u.patch"
 }
 
-imx_next
-ahci
+#imx_next
+#ahci
 
 echo "patch.sh ran successful"
