@@ -140,8 +140,6 @@ config="CONFIG_PLAT_SPEAR"
 check_config_disable
 config="CONFIG_ARCH_STI"
 check_config_disable
-config="CONFIG_ARCH_SUNXI"
-check_config_disable
 config="CONFIG_ARCH_SIRF"
 check_config_disable
 config="CONFIG_ARCH_TEGRA"
@@ -218,7 +216,18 @@ check_config_disable
 #
 config="CONFIG_ZRAM"
 check_config_module
-# CONFIG_ZRAM_DEBUG is not set
+
+#
+# Misc devices
+#
+config="CONFIG_SRAM"
+check_config_builtin
+
+#
+# EEPROM support
+#
+config="CONFIG_EEPROM_SUNXI_SID"
+check_config_builtin
 
 #
 # Controllers with non-SFF native interface
@@ -274,6 +283,8 @@ check_config_builtin
 # Watchdog Device Drivers
 #
 config="CONFIG_OMAP_WATCHDOG"
+check_config_builtin
+config="CONFIG_SUNXI_WATCHDOG"
 check_config_builtin
 config="CONFIG_TWL4030_WATCHDOG"
 check_config_builtin
@@ -402,6 +413,14 @@ config="CONFIG_USB_ETH_RNDIS"
 check_config_builtin
 
 #
+# MMC/SD/SDIO Host Controller Drivers
+#
+config="CONFIG_NEW_LEDS"
+check_config_builtin
+config="CONFIG_LEDS_CLASS"
+check_config_builtin
+
+#
 # LED drivers
 #
 config="CONFIG_LEDS_GPIO"
@@ -410,6 +429,8 @@ check_config_builtin
 #
 # LED Triggers
 #
+config="CONFIG_LEDS_TRIGGERS"
+check_config_builtin
 config="CONFIG_LEDS_TRIGGER_TIMER"
 check_config_builtin
 config="CONFIG_LEDS_TRIGGER_ONESHOT"
@@ -429,6 +450,8 @@ check_config_builtin
 # on-CPU RTC drivers
 #
 config="CONFIG_RTC_DRV_OMAP"
+check_config_builtin
+config="CONFIG_RTC_DRV_SUNXI"
 check_config_builtin
 config="CONFIG_RTC_DRV_SNVS"
 check_config_builtin
