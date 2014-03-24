@@ -544,8 +544,8 @@ check_config_builtin
 #
 config="CONFIG_XFS_FS"
 check_config_builtin
-config="CONFIG_BTRFS_FS"
-check_config_builtin
+#config="CONFIG_BTRFS_FS"
+#check_config_builtin
 config="CONFIG_AUTOFS4_FS"
 check_config_builtin
 
