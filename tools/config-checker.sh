@@ -116,6 +116,8 @@ check_config_builtin
 #
 # CPU Core family selection
 #
+config="CONFIG_ARCH_VIRT"
+check_config_disable
 config="CONFIG_ARCH_MVEBU"
 check_config_disable
 config="CONFIG_ARCH_BCM"
@@ -132,6 +134,8 @@ check_config_disable
 #
 # OMAP Feature Selections
 #
+config="CONFIG_ARCH_QCOM"
+check_config_disable
 config="CONFIG_ARCH_ROCKCHIP"
 check_config_disable
 config="CONFIG_ARCH_SOCFPGA"
@@ -147,8 +151,6 @@ check_config_disable
 config="CONFIG_ARCH_U8500"
 check_config_disable
 config="CONFIG_ARCH_VEXPRESS"
-check_config_disable
-config="CONFIG_ARCH_VIRT"
 check_config_disable
 config="CONFIG_ARCH_WM8850"
 check_config_disable
@@ -218,12 +220,6 @@ config="CONFIG_ZRAM"
 check_config_module
 
 #
-# Misc devices
-#
-config="CONFIG_SRAM"
-check_config_builtin
-
-#
 # EEPROM support
 #
 config="CONFIG_EEPROM_SUNXI_SID"
@@ -232,8 +228,6 @@ check_config_builtin
 #
 # Controllers with non-SFF native interface
 #
-config="CONFIG_SATA_AHCI_PLATFORM"
-check_config_builtin
 config="CONFIG_AHCI_IMX"
 check_config_builtin
 config="CONFIG_AHCI_SUNXI"
@@ -281,10 +275,6 @@ check_config_builtin
 config="CONFIG_OMAP4_THERMAL"
 check_config_builtin
 config="CONFIG_OMAP5_THERMAL"
-check_config_builtin
-config="CONFIG_WATCHDOG"
-check_config_builtin
-config="CONFIG_WATCHDOG_CORE"
 check_config_builtin
 
 #
@@ -423,14 +413,6 @@ config="CONFIG_USB_ETH_RNDIS"
 check_config_builtin
 
 #
-# MMC/SD/SDIO Host Controller Drivers
-#
-config="CONFIG_NEW_LEDS"
-check_config_builtin
-config="CONFIG_LEDS_CLASS"
-check_config_builtin
-
-#
 # LED drivers
 #
 config="CONFIG_LEDS_GPIO"
@@ -439,8 +421,6 @@ check_config_builtin
 #
 # LED Triggers
 #
-config="CONFIG_LEDS_TRIGGERS"
-check_config_builtin
 config="CONFIG_LEDS_TRIGGER_TIMER"
 check_config_builtin
 config="CONFIG_LEDS_TRIGGER_ONESHOT"
@@ -487,6 +467,8 @@ config="CONFIG_ANDROID"
 check_config_builtin
 config="CONFIG_ANDROID_BINDER_IPC"
 check_config_builtin
+config="CONFIG_ANDROID_BINDER_IPC_32BIT"
+check_config_builtin
 config="CONFIG_ASHMEM"
 check_config_builtin
 config="CONFIG_ANDROID_LOGGER"
@@ -518,6 +500,33 @@ check_config_builtin
 config="CONFIG_DRM_IMX_IPUV3"
 check_config_builtin
 config="CONFIG_DRM_IMX_HDMI"
+check_config_builtin
+
+#
+# Common Clock Framework
+#
+config="CONFIG_COMMON_CLK_QCOM"
+check_config_disable
+if_config="CONFIG_COMMON_CLK_QCOM"
+config="CONFIG_MSM_GCC_8660"
+check_if_set_then_disable
+config="CONFIG_MSM_GCC_8960"
+check_if_set_then_disable
+config="CONFIG_MSM_MMCC_8960"
+check_if_set_then_disable
+config="CONFIG_MSM_GCC_8974"
+check_if_set_then_disable
+config="CONFIG_MSM_MMCC_8974"
+check_if_set_then_disable
+
+#
+# Hardware Spinlock drivers
+#
+config="CONFIG_OMAP2PLUS_MBOX"
+check_config_builtin
+config="CONFIG_OMAP_IOMMU"
+check_config_builtin
+config="CONFIG_OMAP_IOVMM"
 check_config_builtin
 
 #
@@ -563,5 +572,17 @@ check_config_builtin
 #
 config="CONFIG_SCHEDSTATS"
 check_config_builtin
+
+#
+# Library routines
+#
+config="CONFIG_XZ_DEC_X86"
+check_config_disable
+config="CONFIG_XZ_DEC_POWERPC"
+check_config_disable
+config="CONFIG_XZ_DEC_IA64"
+check_config_disable
+config="CONFIG_XZ_DEC_SPARC"
+check_config_disable
 
 #
