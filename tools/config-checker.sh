@@ -236,6 +236,14 @@ config="CONFIG_SATA_AHCI_PLATFORM"
 check_config_builtin
 config="CONFIG_AHCI_IMX"
 check_config_builtin
+config="CONFIG_AHCI_SUNXI"
+check_config_builtin
+
+#
+# SPI Master Controller Drivers
+#
+config="CONFIG_SPI_SUN4I"
+check_config_builtin
 
 #
 # SPI Protocol Masters
@@ -299,6 +307,8 @@ check_config_builtin
 config="CONFIG_TWL6040_CORE"
 check_config_builtin
 config="CONFIG_REGULATOR_ANATOP"
+check_config_builtin
+config="CONFIG_REGULATOR_PBIAS"
 check_config_builtin
 config="CONFIG_REGULATOR_PFUZE100"
 check_config_builtin
@@ -515,6 +525,10 @@ check_config_builtin
 #
 config="CONFIG_TWL4030_USB"
 check_config_module
+config="CONFIG_TI_PIPE3"
+check_config_builtin
+config="CONFIG_PHY_SUN4I_USB"
+check_config_builtin
 
 #
 # File systems
