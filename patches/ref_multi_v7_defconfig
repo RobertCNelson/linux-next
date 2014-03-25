@@ -1815,7 +1815,6 @@ CONFIG_SERIO_LIBPS2=y
 # CONFIG_SERIO_PS2MULT is not set
 # CONFIG_SERIO_ARC_PS2 is not set
 # CONFIG_SERIO_APBPS2 is not set
-# CONFIG_SERIO_OLPC_APSP is not set
 # CONFIG_GAMEPORT is not set
 
 #
@@ -2737,6 +2736,7 @@ CONFIG_DRM_PANEL=y
 # Display Panels
 #
 CONFIG_DRM_PANEL_SIMPLE=y
+# CONFIG_DRM_PTN3460 is not set
 
 #
 # Frame buffer Devices
