@@ -413,6 +413,12 @@ config="CONFIG_USB_ETH_RNDIS"
 check_config_builtin
 
 #
+# MMC/SD/SDIO Host Controller Drivers
+#
+config="CONFIG_MMC_SUNXI"
+check_config_builtin
+
+#
 # LED drivers
 #
 config="CONFIG_LEDS_GPIO"
