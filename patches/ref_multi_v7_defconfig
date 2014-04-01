@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.14.0-rc8 Kernel Configuration
+# Linux/arm 3.14.0 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -1803,6 +1803,7 @@ CONFIG_INPUT_MPU3050=y
 # CONFIG_INPUT_IMS_PCU is not set
 # CONFIG_INPUT_CMA3000 is not set
 CONFIG_INPUT_SIRFSOC_ONKEY=y
+# CONFIG_INPUT_SOC_BUTTON_ARRAY is not set
 
 #
 # Hardware I/O ports
