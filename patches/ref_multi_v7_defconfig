@@ -3499,6 +3499,7 @@ CONFIG_DMA_OF=y
 # CONFIG_ASYNC_TX_DMA is not set
 # CONFIG_DMATEST is not set
 CONFIG_DMA_ENGINE_RAID=y
+# CONFIG_QCOM_BAM_DMA is not set
 # CONFIG_AUXDISPLAY is not set
 # CONFIG_UIO is not set
 # CONFIG_VFIO is not set
