@@ -27,11 +27,11 @@ config="multi_v7_defconfig"
 toolchain="gcc_linaro_gnueabihf_4_8"
 
 #Kernel/Build
-KERNEL_REL=3.14
-KERNEL_TAG=${KERNEL_REL}
+KERNEL_REL=3.15
+KERNEL_TAG=${KERNEL_REL}-rc1
 BUILD=X0
 
-tag="20140411"
+tag="20140414"
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
