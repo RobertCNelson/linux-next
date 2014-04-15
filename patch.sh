@@ -24,12 +24,9 @@
 
 git="git am"
 
-git_patchset="git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
+git_patchset="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
 if [ -f ${DIR}/system.sh ] ; then
 	. ${DIR}/system.sh
-	if [ "${GIT_OVER_HTTP}" ] ; then
-		git_patchset="http://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
-	fi
 fi
 
 . ${DIR}/version.sh
