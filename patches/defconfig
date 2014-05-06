@@ -3621,6 +3621,7 @@ CONFIG_IIO=y
 # CONFIG_BMA180 is not set
 # CONFIG_IIO_ST_ACCEL_3AXIS is not set
 # CONFIG_KXSD9 is not set
+# CONFIG_MMA8452 is not set
 
 #
 # Analog to digital converters
@@ -3736,6 +3737,7 @@ CONFIG_AK8975=y
 #
 # Pressure sensors
 #
+# CONFIG_MPL115 is not set
 # CONFIG_MPL3115 is not set
 # CONFIG_IIO_ST_PRESS is not set
 
@@ -3747,6 +3749,7 @@ CONFIG_AK8975=y
 #
 # Temperature sensors
 #
+# CONFIG_MLX90614 is not set
 # CONFIG_TMP006 is not set
 # CONFIG_VME_BUS is not set
 CONFIG_PWM=y
