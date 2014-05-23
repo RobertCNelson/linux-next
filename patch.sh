@@ -60,12 +60,12 @@ next () {
 #	${git} "${DIR}/patches/next/0001-clk-sunxi-factors-automatic-reparenting-support.patch"
 #	${git} "${DIR}/patches/next/0002-clk-sunxi-Implement-MMC-phase-control.patch"
 #	${git} "${DIR}/patches/next/0003-ARM-sunxi-clk-export-clk_sunxi_mmc_phase_control.patch"
-	${git} "${DIR}/patches/next/0004-ARM-sunxi-Add-driver-for-SD-MMC-hosts-found-on-Allwi.patch"
-	${git} "${DIR}/patches/next/0005-ARM-dts-sun7i-Add-support-for-mmc.patch"
-	${git} "${DIR}/patches/next/0006-ARM-dts-sun4i-Add-support-for-mmc.patch"
-	${git} "${DIR}/patches/next/0007-ARM-dts-sun5i-Add-support-for-mmc.patch"
-	${git} "${DIR}/patches/next/0008-ARM-sunxi-Add-documentation-for-driver-for-SD-MMC-ho.patch"
-	${git} "${DIR}/patches/next/0009-arm-dts-sun4i-a10-olinuxino-lime-enable-mmc0.patch"
+#	${git} "${DIR}/patches/next/0004-ARM-sunxi-Add-driver-for-SD-MMC-hosts-found-on-Allwi.patch"
+#	${git} "${DIR}/patches/next/0005-ARM-dts-sun7i-Add-support-for-mmc.patch"
+#	${git} "${DIR}/patches/next/0006-ARM-dts-sun4i-Add-support-for-mmc.patch"
+#	${git} "${DIR}/patches/next/0007-ARM-dts-sun5i-Add-support-for-mmc.patch"
+#	${git} "${DIR}/patches/next/0008-ARM-sunxi-Add-documentation-for-driver-for-SD-MMC-ho.patch"
+#	${git} "${DIR}/patches/next/0009-arm-dts-sun4i-a10-olinuxino-lime-enable-mmc0.patch"
 }
 
 example () {
