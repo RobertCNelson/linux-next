@@ -26,10 +26,10 @@ toolchain="gcc_linaro_gnueabihf_4_8"
 
 #Kernel/Build
 KERNEL_REL=3.15
-KERNEL_TAG=${KERNEL_REL}-rc6
+KERNEL_TAG=${KERNEL_REL}-rc7
 BUILD=x0
 
-tag="20140523"
+tag="20140527"
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
