@@ -29,7 +29,7 @@ KERNEL_REL=3.15
 KERNEL_TAG=${KERNEL_REL}-rc7
 BUILD=x0
 
-tag="20140529"
+tag="20140530"
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
