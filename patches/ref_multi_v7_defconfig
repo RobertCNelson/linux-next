@@ -3932,6 +3932,7 @@ CONFIG_IIO=y
 # CONFIG_IIO_ST_ACCEL_3AXIS is not set
 # CONFIG_KXSD9 is not set
 # CONFIG_MMA8452 is not set
+# CONFIG_KXCJK1013 is not set
 
 #
 # Analog to digital converters
@@ -4039,6 +4040,7 @@ CONFIG_IIO=y
 # Magnetometer sensors
 #
 CONFIG_AK8975=y
+# CONFIG_AK09911 is not set
 # CONFIG_MAG3110 is not set
 # CONFIG_IIO_ST_MAGN_3AXIS is not set
 
@@ -4052,6 +4054,7 @@ CONFIG_AK8975=y
 # CONFIG_MPL115 is not set
 # CONFIG_MPL3115 is not set
 # CONFIG_IIO_ST_PRESS is not set
+# CONFIG_T5403 is not set
 
 #
 # Lightning sensors
@@ -4110,6 +4113,7 @@ CONFIG_PHY_SUN4I_USB=y
 # CONFIG_PHY_EXYNOS5_USBDRD is not set
 # CONFIG_POWERCAP is not set
 # CONFIG_MCB is not set
+# CONFIG_THUNDERBOLT is not set
 
 #
 # File systems
