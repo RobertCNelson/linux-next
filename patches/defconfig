@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.16.0-rc1 Kernel Configuration
+# Linux/arm 3.16.0-rc2 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -587,6 +587,7 @@ CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
 # CONFIG_FRONTSWAP is not set
 CONFIG_CMA=y
 # CONFIG_CMA_DEBUG is not set
+CONFIG_CMA_AREAS=7
 # CONFIG_ZBUD is not set
 CONFIG_ZSMALLOC=y
 # CONFIG_PGTABLE_MAPPING is not set
@@ -899,7 +900,6 @@ CONFIG_CMA_SIZE_SEL_MBYTES=y
 # CONFIG_CMA_SIZE_SEL_MIN is not set
 # CONFIG_CMA_SIZE_SEL_MAX is not set
 CONFIG_CMA_ALIGNMENT=8
-CONFIG_CMA_AREAS=7
 
 #
 # Bus devices
@@ -2330,7 +2330,6 @@ CONFIG_MFD_CROS_EC_SPI=y
 # CONFIG_MFD_MAX14577 is not set
 # CONFIG_MFD_MAX77686 is not set
 # CONFIG_MFD_MAX77693 is not set
-# CONFIG_MFD_MAX77802 is not set
 CONFIG_MFD_MAX8907=y
 # CONFIG_MFD_MAX8925 is not set
 # CONFIG_MFD_MAX8997 is not set
@@ -3586,7 +3585,6 @@ CONFIG_SENSORS_ISL29028=y
 # Triggers - standalone
 #
 # CONFIG_IIO_SIMPLE_DUMMY is not set
-# CONFIG_CRYSTALHD is not set
 # CONFIG_FB_XGI is not set
 # CONFIG_USB_ENESTORAGE is not set
 # CONFIG_BCM_WIMAX is not set
