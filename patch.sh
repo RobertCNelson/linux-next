@@ -60,12 +60,13 @@ external_git () {
 }
 
 local_patch () {
-	echo "dir: dir"
-	${git} "${DIR}/patches/dir/0001-patch.patch"
+	echo "dir: staged"
+	${git} "${DIR}/patches/staged/0001-ARM-dts-add-initial-Rex-Pro-board-support.patch"
+	${git} "${DIR}/patches/staged/0002-ARM-dts-add-initial-Rex-Basic-board-support.patch"
 }
 
 #external_git
-#local_patch
+local_patch
 
 next () {
 	echo "pulling: next-${tag}"
