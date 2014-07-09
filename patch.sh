@@ -54,7 +54,7 @@ cleanup () {
 }
 
 external_git () {
-	git_tag=""
+	git_tag="next-${tag}"
 	echo "pulling: ${git_tag}"
 	git pull ${git_opts} ${git_patchset} ${git_tag}
 }
@@ -65,20 +65,14 @@ local_patch () {
 	${git} "${DIR}/patches/staged/0002-ARM-dts-add-initial-Rex-Basic-board-support.patch"
 }
 
-#external_git
+external_git
 local_patch
 
-next () {
-	echo "pulling: next-${tag}"
-	git pull ${git_opts} ${git_patchset} next-${tag}
-}
 
 example () {
 	echo "dir: dir"
 	#${git} "${DIR}/patches/dir/0001-patch.patch"
 }
-
-next
 
 packaging_setup () {
 	cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
