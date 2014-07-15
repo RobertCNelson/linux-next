@@ -61,8 +61,8 @@ external_git () {
 
 local_patch () {
 	echo "dir: staged"
-	${git} "${DIR}/patches/staged/0001-ARM-dts-add-initial-Rex-Pro-board-support.patch"
-	${git} "${DIR}/patches/staged/0002-ARM-dts-add-initial-Rex-Basic-board-support.patch"
+#	${git} "${DIR}/patches/staged/0001-ARM-dts-add-initial-Rex-Pro-board-support.patch"
+#	${git} "${DIR}/patches/staged/0002-ARM-dts-add-initial-Rex-Basic-board-support.patch"
 }
 
 external_git
