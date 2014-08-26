@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.17.0-rc1 Kernel Configuration
+# Linux/arm 3.17.0-rc2 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -848,6 +848,7 @@ CONFIG_CAN_CALC_BITTIMING=y
 # CONFIG_CAN_RCAR is not set
 # CONFIG_CAN_SJA1000 is not set
 # CONFIG_CAN_C_CAN is not set
+# CONFIG_CAN_M_CAN is not set
 # CONFIG_CAN_CC770 is not set
 
 #
@@ -1814,6 +1815,7 @@ CONFIG_INPUT_MPU3050=y
 # CONFIG_INPUT_IMS_PCU is not set
 # CONFIG_INPUT_CMA3000 is not set
 # CONFIG_INPUT_SOC_BUTTON_ARRAY is not set
+# CONFIG_INPUT_DRV260X_HAPTICS is not set
 
 #
 # Hardware I/O ports
@@ -2747,6 +2749,7 @@ CONFIG_DRM_PANEL=y
 #
 CONFIG_FB=y
 # CONFIG_FIRMWARE_EDID is not set
+CONFIG_FB_CMDLINE=y
 # CONFIG_FB_DDC is not set
 # CONFIG_FB_BOOT_VESA_SUPPORT is not set
 CONFIG_FB_CFB_FILLRECT=y
@@ -3002,7 +3005,6 @@ CONFIG_SND_SOC=y
 # CONFIG_SND_SOC_FSL_SSI is not set
 # CONFIG_SND_SOC_FSL_SPDIF is not set
 # CONFIG_SND_SOC_FSL_ESAI is not set
-# CONFIG_SND_SOC_FSL_ASOC_CARD is not set
 # CONFIG_SND_SOC_IMX_AUDMUX is not set
 # CONFIG_SND_IMX_SOC is not set
 # CONFIG_SND_OMAP_SOC is not set
@@ -3228,6 +3230,7 @@ CONFIG_USB_STORAGE=y
 #
 # CONFIG_USB_MDC800 is not set
 # CONFIG_USB_MICROTEK is not set
+# CONFIG_USBIP_CORE is not set
 CONFIG_USB_MUSB_HDRC=y
 # CONFIG_USB_MUSB_HOST is not set
 # CONFIG_USB_MUSB_GADGET is not set
@@ -3591,7 +3594,6 @@ CONFIG_DMA_OF=y
 #
 CONFIG_STAGING=y
 # CONFIG_ET131X is not set
-# CONFIG_USBIP_CORE is not set
 # CONFIG_PRISM2_USB is not set
 # CONFIG_COMEDI is not set
 # CONFIG_RTL8192U is not set
@@ -3645,13 +3647,8 @@ CONFIG_STAGING=y
 #
 # Direct Digital Synthesis
 #
-# CONFIG_AD5930 is not set
 # CONFIG_AD9832 is not set
 # CONFIG_AD9834 is not set
-# CONFIG_AD9850 is not set
-# CONFIG_AD9852 is not set
-# CONFIG_AD9910 is not set
-# CONFIG_AD9951 is not set
 
 #
 # Digital gyroscope sensors
@@ -3817,6 +3814,7 @@ CONFIG_IIO=y
 # Accelerometers
 #
 # CONFIG_BMA180 is not set
+# CONFIG_BMC150_ACCEL is not set
 # CONFIG_IIO_ST_ACCEL_3AXIS is not set
 # CONFIG_KXSD9 is not set
 # CONFIG_MMA8452 is not set
@@ -3840,6 +3838,7 @@ CONFIG_IIO=y
 # CONFIG_MCP3422 is not set
 # CONFIG_NAU7802 is not set
 # CONFIG_TI_ADC081C is not set
+# CONFIG_TI_ADC128S052 is not set
 # CONFIG_TWL4030_MADC is not set
 # CONFIG_TWL6030_GPADC is not set
 # CONFIG_VF610_ADC is not set
@@ -3870,6 +3869,7 @@ CONFIG_IIO=y
 # CONFIG_AD5791 is not set
 # CONFIG_AD7303 is not set
 # CONFIG_MAX517 is not set
+# CONFIG_MAX5821 is not set
 # CONFIG_MCP4725 is not set
 # CONFIG_MCP4922 is not set
 
@@ -4370,6 +4370,7 @@ CONFIG_CRYPTO_MANAGER_DISABLE_TESTS=y
 # CONFIG_CRYPTO_PCRYPT is not set
 CONFIG_CRYPTO_WORKQUEUE=y
 # CONFIG_CRYPTO_CRYPTD is not set
+# CONFIG_CRYPTO_MCRYPTD is not set
 CONFIG_CRYPTO_AUTHENC=m
 # CONFIG_CRYPTO_TEST is not set
 
