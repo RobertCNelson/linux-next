@@ -60,19 +60,12 @@ external_git () {
 }
 
 local_patch () {
-	echo "dir: staged"
-#	${git} "${DIR}/patches/staged/0001-ARM-dts-add-initial-Rex-Pro-board-support.patch"
-#	${git} "${DIR}/patches/staged/0002-ARM-dts-add-initial-Rex-Basic-board-support.patch"
+	echo "dir: dir"
+	${git} "${DIR}/patches/dir/0001-patch.patch"
 }
 
 external_git
-local_patch
-
-
-example () {
-	echo "dir: dir"
-	#${git} "${DIR}/patches/dir/0001-patch.patch"
-}
+#local_patch
 
 packaging_setup () {
 	cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
@@ -90,4 +83,4 @@ packaging () {
 
 #packaging_setup
 packaging
-echo "patch.sh ran successful"
+echo "patch.sh ran successfully"
