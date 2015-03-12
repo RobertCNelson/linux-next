@@ -83,11 +83,11 @@ redhat_reqs () {
 			pkg="uboot-tools"
 			check_rpm
 			;;
-		19|20|21)
+		20|21|22)
 			pkg="uboot-tools"
 			check_rpm
 			;;
-		17|18)
+		17|18|19)
 			#end of life...
 			pkg="uboot-tools"
 			check_rpm
@@ -252,9 +252,20 @@ debian_regs () {
 			deb_distro="precise"
 		fi
 
+		if [ "x${deb_distro}" = "xbelenos" ] ; then
+			#http://listas.trisquel.info/pipermail/trisquel-announce/2014-November/000018.html
+			#lsb_release -a
+			#Distributor ID:    Trisquel
+			#Description:    Trisquel GNU/Linux 7.0, Belenos
+			#Release:    7.0
+			#Codename:    belenos
+			deb_distro="trusty"
+		fi
+
 		#Linux Mint: Compatibility Matrix
 		#http://www.linuxmint.com/oldreleases.php
 		#http://packages.linuxmint.com/index.php
+		#http://mirrors.kernel.org/linuxmint-packages/dists/
 		case "${deb_distro}" in
 		debian)
 			deb_distro="jessie"
@@ -286,6 +297,22 @@ debian_regs () {
 		qiana)
 			deb_distro="trusty"
 			;;
+		rebecca)
+			#http://blog.linuxmint.com/?p=2688
+			deb_distro="trusty"
+			;;
+		esac
+
+		#Future Debian Code names:
+		case "${deb_distro}" in
+		stretch)
+			#Debian 9
+			deb_distro="sid"
+			;;
+		buster)
+			#Debian 10
+			deb_distro="sid"
+			;;
 		esac
 
 		#https://wiki.ubuntu.com/Releases
@@ -294,8 +321,9 @@ debian_regs () {
 		squeeze|wheezy|jessie|sid)
 			unset warn_eol_distro
 			;;
-		utopic)
-			#14.10 (EOL: xyz)
+		utopic|vivid)
+			#14.10 (EOL: June 2015)
+			#15.04 (EOL: January 2016)
 			unset warn_eol_distro
 			;;
 		trusty)
