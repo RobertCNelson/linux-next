@@ -27,6 +27,13 @@ if [ -f ${DIR}/system.sh ] ; then
 	. ${DIR}/system.sh
 fi
 
+#Debian 7 (Wheezy): git version 1.7.10.4 and later needs "--no-edit"
+unset git_opts
+git_no_edit=$(LC_ALL=C git help pull | grep -m 1 -e "--no-edit" || true)
+if [ ! "x${git_no_edit}" = "x" ] ; then
+	git_opts="--no-edit"
+fi
+
 git="git am"
 git_patchset="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
 #git_opts
@@ -53,10 +60,42 @@ cleanup () {
 	exit 2
 }
 
+pick () {
+	if [ ! -d ../patches/${pick_dir} ] ; then
+		mkdir -p ../patches/${pick_dir}
+	fi
+	git format-patch -1 ${SHA} --start-number ${num} -o ../patches/${pick_dir}
+	num=$(($num+1))
+}
+
 external_git () {
 	git_tag="next-${tag}"
 	echo "pulling: ${git_tag}"
 	git pull ${git_opts} ${git_patchset} ${git_tag}
+}
+
+rt_cleanup () {
+	echo "rt: needs fixup"
+	exit 2
+}
+
+rt () {
+	echo "dir: rt"
+	rt_patch="${KERNEL_REL}${kernel_rt}"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		wget -c https://www.kernel.org/pub/linux/kernel/projects/rt/${KERNEL_REL}/patch-${rt_patch}.patch.xz
+		xzcat patch-${rt_patch}.patch.xz | patch -p1 || rt_cleanup
+		rm -f patch-${rt_patch}.patch.xz
+		rm -f localversion-rt
+		git add .
+		git commit -a -m 'merge: CONFIG_PREEMPT_RT Patch Set' -s
+		git format-patch -1 -o ../patches/rt/
+
+		exit 2
+	fi
+
+	${git} "${DIR}/patches/rt/0001-merge-CONFIG_PREEMPT_RT-Patch-Set.patch"
 }
 
 local_patch () {
@@ -65,33 +104,21 @@ local_patch () {
 }
 
 external_git
+#rt
 #local_patch
-
-packaging_setup () {
-	cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
-	git commit -a -m 'packaging: sync with mainline' -s
-
-	git format-patch -1 -o "${DIR}/patches/packaging"
-	exit 2
-}
 
 packaging () {
 	echo "dir: packaging"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
-		start_cleanup
-	fi
-
-	#${git} "${DIR}/patches/packaging/0001-packaging-sync-with-mainline.patch"
-	${git} "${DIR}/patches/packaging/0002-deb-pkg-install-dtbs-in-linux-image-package.patch"
-	#${git} "${DIR}/patches/packaging/0003-deb-pkg-no-dtbs_install.patch"
-
-	if [ "x${regenerate}" = "xenable" ] ; then
-		number=3
-		cleanup
+		cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
+		git commit -a -m 'packaging: sync builddeb changes' -s
+		git format-patch -1 -o "${DIR}/patches/packaging"
+		exit 2
+	else
+		${git} "${DIR}/patches/packaging/0001-packaging-sync-builddeb-changes.patch"
 	fi
 }
 
-#packaging_setup
 packaging
 echo "patch.sh ran successfully"
