@@ -19,12 +19,12 @@ toolchain="gcc_linaro_gnueabihf_5"
 #toolchain="gcc_linaro_aarch64_gnu_5"
 
 #Kernel/Build
-KERNEL_REL=4.0
-KERNEL_TAG=${KERNEL_REL}-rc3
+KERNEL_REL=4.4
+KERNEL_TAG=${KERNEL_REL}-rc6
 BUILD=x0
 kernel_rt=".X-rtY"
 
-tag="20150312"
+tag="20151223"
 
 #v4.X-rcX + upto SHA
 #prev_KERNEL_SHA=""

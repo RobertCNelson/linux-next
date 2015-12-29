@@ -1,0 +1,37 @@
+From 496f16e99b328de1c2b1c82392a5c4e0dffe5bdf Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Tue, 29 Dec 2015 14:24:37 -0600
+Subject: [PATCH] packaging: sync builddeb changes
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ scripts/package/builddeb | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/scripts/package/builddeb b/scripts/package/builddeb
+index 6c3b038..5221d24 100755
+--- a/scripts/package/builddeb
++++ b/scripts/package/builddeb
+@@ -149,9 +149,18 @@ else
+ fi
+ 
+ if grep -q "^CONFIG_OF=y" $KCONFIG_CONFIG ; then
++	mkdir -p "$tmpdir/boot/dtbs/$version"
+ 	# Only some architectures with OF support have this target
+ 	if grep -q dtbs_install "${srctree}/arch/$SRCARCH/Makefile"; then
+-		$MAKE KBUILD_SRC= INSTALL_DTBS_PATH="$tmpdir/usr/lib/$packagename" dtbs_install
++		$MAKE KBUILD_SRC= INSTALL_DTBS_PATH="$tmpdir/boot/dtbs/$version" dtbs_install
++	else
++		$MAKE KBUILD_SRC= dtbs
++		find arch/arm/boot/ -iname "*.dtb" -exec cp -v '{}' "$tmpdir/boot/dtbs/$version" \;
++	fi
++
++	#make dtbs_install seems to add an .old directory
++	if [ -d "$tmpdir/boot/dtbs/$version.old" ] ; then
++		rm -rf "$tmpdir/boot/dtbs/$version.old"
+ 	fi
+ fi
+ 
+-- 
+2.6.4
+
