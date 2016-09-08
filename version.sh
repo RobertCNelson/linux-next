@@ -18,20 +18,20 @@ KERNEL_ARCH=arm
 #toolchain="gcc_linaro_gnueabihf_4_7"
 #toolchain="gcc_linaro_gnueabihf_4_8"
 #toolchain="gcc_linaro_gnueabihf_4_9"
-toolchain="gcc_linaro_gnueabihf_5"
-#toolchain="gcc_linaro_gnueabihf_6"
+#toolchain="gcc_linaro_gnueabihf_5"
+toolchain="gcc_linaro_gnueabihf_6"
 #arm64
 #KERNEL_ARCH=arm64
 #toolchain="gcc_linaro_aarch64_gnu_5"
 #toolchain="gcc_linaro_aarch64_gnu_6"
 
 #Kernel/Build
-KERNEL_REL=4.7
+KERNEL_REL=4.8
 KERNEL_TAG=${KERNEL_REL}-rc5
 BUILD=${build_prefix}0
 kernel_rt=".X-rtY"
 
-tag="20160629"
+tag="20160908"
 
 #v4.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
