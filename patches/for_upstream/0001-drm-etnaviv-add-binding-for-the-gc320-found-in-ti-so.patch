@@ -1,0 +1,45 @@
+From 44beed610bec5ee41dcf46c733e70a876e61db20 Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 17 Nov 2016 20:05:10 -0600
+Subject: [PATCH 1/6] drm/etnaviv: add binding for the gc320 found in ti socs
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+CC: Julien <jboulnois@gmail.com>
+CC: Christian Gmeiner <christian.gmeiner@gmail.com>
+CC: Russell King <rmk+kernel@arm.linux.org.uk>
+CC: Lucas Stach <l.stach@pengutronix.de>
+CC: Nishanth Menon <nm@ti.com>
+CC: Tomi Valkeinen <tomi.valkeinen@ti.com>
+CC: Tony Lindgren <tony@atomide.com>
+---
+ Documentation/devicetree/bindings/display/etnaviv/etnaviv-drm.txt | 1 +
+ drivers/gpu/drm/etnaviv/etnaviv_drv.c                             | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/display/etnaviv/etnaviv-drm.txt b/Documentation/devicetree/bindings/display/etnaviv/etnaviv-drm.txt
+index ed5e0a7..9fa259d 100644
+--- a/Documentation/devicetree/bindings/display/etnaviv/etnaviv-drm.txt
++++ b/Documentation/devicetree/bindings/display/etnaviv/etnaviv-drm.txt
+@@ -8,6 +8,7 @@ Required properties:
+ - compatible: Should be one of
+     "fsl,imx-gpu-subsystem"
+     "marvell,dove-gpu-subsystem"
++    "ti,gc320-gpu-subsystem"
+ - cores: Should contain a list of phandles pointing to Vivante GPU devices
+ 
+ example:
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.c b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
+index a6799b0..ce51270 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_drv.c
++++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
+@@ -653,6 +653,7 @@ static int etnaviv_pdev_remove(struct platform_device *pdev)
+ static const struct of_device_id dt_match[] = {
+ 	{ .compatible = "fsl,imx-gpu-subsystem" },
+ 	{ .compatible = "marvell,dove-gpu-subsystem" },
++	{ .compatible = "ti,gc320-gpu-subsystem" },
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(of, dt_match);
+-- 
+2.10.2
+

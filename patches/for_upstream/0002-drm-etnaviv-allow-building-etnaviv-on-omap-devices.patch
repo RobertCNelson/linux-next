@@ -1,0 +1,29 @@
+From 9dd7642c3a452c192679c8ea3b7fc7bc3c2ff96c Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 17 Nov 2016 20:11:12 -0600
+Subject: [PATCH 2/6] drm/etnaviv: allow building etnaviv on omap devices
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+CC: Christian Gmeiner <christian.gmeiner@gmail.com>
+CC: Russell King <rmk+kernel@arm.linux.org.uk>
+CC: Lucas Stach <l.stach@pengutronix.de>
+---
+ drivers/gpu/drm/etnaviv/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/etnaviv/Kconfig b/drivers/gpu/drm/etnaviv/Kconfig
+index 2cde7a5..b776f41 100644
+--- a/drivers/gpu/drm/etnaviv/Kconfig
++++ b/drivers/gpu/drm/etnaviv/Kconfig
+@@ -2,7 +2,7 @@
+ config DRM_ETNAVIV
+ 	tristate "ETNAVIV (DRM support for Vivante GPU IP cores)"
+ 	depends on DRM
+-	depends on ARCH_MXC || ARCH_DOVE
++	depends on ARCH_MXC || ARCH_DOVE || ARCH_OMAP2PLUS
+ 	select SHMEM
+ 	select TMPFS
+ 	select IOMMU_API
+-- 
+2.10.2
+

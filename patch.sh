@@ -271,6 +271,8 @@ backports () {
 
 ###
 #backports
+dir 'for_upstream'
+exit 2
 
 packaging () {
 	echo "dir: packaging"

@@ -1,0 +1,30 @@
+From d283ee371d83b3a8a397ec27d0e692e8c9ae396e Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 17 Nov 2016 20:22:28 -0600
+Subject: [PATCH 5/6] ARM: dts: dra7: add vivante for bb2d module
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+CC: Julien <jboulnois@gmail.com>
+CC: Nishanth Menon <nm@ti.com>
+CC: Tomi Valkeinen <tomi.valkeinen@ti.com>
+CC: Tony Lindgren <tony@atomide.com>
+---
+ arch/arm/boot/dts/dra7.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/dra7.dtsi b/arch/arm/boot/dts/dra7.dtsi
+index 43488b6..22bd0a5 100644
+--- a/arch/arm/boot/dts/dra7.dtsi
++++ b/arch/arm/boot/dts/dra7.dtsi
+@@ -960,7 +960,7 @@
+ 		};
+ 
+ 		bb2d: bb2d@59000000 {
+-			compatible = "ti,dra7-bb2d";
++			compatible = "ti,dra7-bb2d","vivante,gc";
+ 			reg = <0x59000000 0x0700>;
+ 			interrupts = <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH>;
+ 			ti,hwmods = "bb2d";
+-- 
+2.10.2
+
