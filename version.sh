@@ -2,7 +2,8 @@
 #
 ARCH=$(uname -m)
 
-config="multi_v7_defconfig"
+#config="multi_v7_defconfig"
+config="omap2plus_defconfig"
 
 build_prefix="-x"
 branch_prefix=""
