@@ -373,8 +373,10 @@ debian_regs () {
 			warn_eol_distro=1
 			stop_pkg_search=1
 			;;
-		yakkety)
+		yakkety|zesty|artful)
 			#16.10 yakkety: (EOL: July 2017)
+			#17.04 zesty: (EOL: January 2018)
+			#17.10 artful: (EOL: July 2019)
 			unset warn_eol_distro
 			;;
 		xenial)
@@ -553,6 +555,9 @@ if [ "x${ARCH}" = "xx86_64" ] ; then
 		ignore_32bit="true"
 		;;
 	gcc_linaro_eabi_6|gcc_linaro_gnueabihf_6|gcc_linaro_aarch64_gnu_6)
+		ignore_32bit="true"
+		;;
+	gcc_linaro_eabi_7|gcc_linaro_gnueabihf_7|gcc_linaro_aarch64_gnu_7)
 		ignore_32bit="true"
 		;;
 	*)
