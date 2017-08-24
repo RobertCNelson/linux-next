@@ -31,11 +31,11 @@ toolchain="gcc_linaro_gnueabihf_7"
 
 #Kernel/Build
 KERNEL_REL=4.13
-KERNEL_TAG=${KERNEL_REL}-rc5
+KERNEL_TAG=${KERNEL_REL}-rc6
 BUILD=${build_prefix}0
 kernel_rt=".X-rtY"
 
-tag="20170816"
+tag="20170824"
 
 #v4.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
