@@ -250,6 +250,42 @@ wireguard () {
 	${git} "${DIR}/patches/WireGuard/0001-merge-WireGuard.patch"
 }
 
+ti_pm_firmware () {
+	echo "dir: drivers/ti/firmware"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+
+		cd ../
+		if [ ! -d ./ti-amx3-cm3-pm-firmware ] ; then
+			${git_bin} clone -b ti-v4.1.y-next git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git --depth=1
+		else
+			rm -rf ./ti-amx3-cm3-pm-firmware || true
+			${git_bin} clone -b ti-v4.1.y-next git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git --depth=1
+		fi
+		cd ./KERNEL/
+
+		cp -v ../ti-amx3-cm3-pm-firmware/bin/am* ./firmware/
+
+		${git_bin} add -f ./firmware/am*
+		${git_bin} commit -a -m 'add am33x firmware' -s
+		${git_bin} format-patch -1 -o ../patches/drivers/ti/firmware/
+
+		rm -rf ../ti-amx3-cm3-pm-firmware/ || true
+
+		${git_bin} reset --hard HEAD^
+
+		start_cleanup
+
+		${git} "${DIR}/patches/drivers/ti/firmware/0001-add-am33x-firmware.patch"
+
+		wdir="drivers/ti/firmware"
+		number=1
+		cleanup
+	fi
+
+	${git} "${DIR}/patches/drivers/ti/firmware/0001-add-am33x-firmware.patch"
+}
+
 local_patch () {
 	echo "dir: dir"
 	${git} "${DIR}/patches/dir/0001-patch.patch"
@@ -259,6 +295,7 @@ external_git
 #aufs4
 #rt
 #wireguard
+ti_pm_firmware
 #local_patch
 
 pre_backports () {
@@ -312,11 +349,136 @@ backports () {
 	fi
 }
 
+reverts () {
+	echo "dir: reverts"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
+	#https://github.com/torvalds/linux/commit/00f0ea70d2b82b7d7afeb1bdedc9169eb8ea6675
+	#
+	#Causes bone_capemgr to get stuck on slot 1 and just eventually exit "without" checking slot2/3/4...
+	#
+	#[    5.406775] bone_capemgr bone_capemgr: Baseboard: 'A335BNLT,00C0,2516BBBK2626'
+	#[    5.414178] bone_capemgr bone_capemgr: compatible-baseboard=ti,beaglebone-black - #slots=4
+	#[    5.422573] bone_capemgr bone_capemgr: Failed to add slot #1
+
+	#${git} "${DIR}/patches/reverts/0001-Revert-eeprom-at24-check-if-the-chip-is-functional-i.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		wdir="reverts"
+		number=1
+		cleanup
+	fi
+}
+
+drivers () {
+	dir 'drivers/ar1021_i2c'
+	dir 'drivers/btrfs'
+	dir 'drivers/pwm'
+	dir 'drivers/spi'
+	dir 'drivers/ssd1306'
+	dir 'drivers/tsl2550'
+	dir 'drivers/tps65217'
+	dir 'drivers/opp'
+	dir 'drivers/wiznet'
+	dir 'drivers/ti/overlays'
+	dir 'drivers/ti/cpsw'
+	dir 'drivers/ti/etnaviv'
+	dir 'drivers/ti/eqep'
+	dir 'drivers/ti/rpmsg'
+	dir 'drivers/ti/serial'
+	dir 'drivers/ti/tsc'
+	dir 'drivers/ti/uio'
+	dir 'drivers/ti/gpio'
+}
+
+soc () {
+	dir 'soc/ti'
+	dir 'soc/ti/bone_common'
+	dir 'soc/ti/uboot'
+	dir 'soc/ti/blue'
+	dir 'soc/ti/sancloud'
+	dir 'soc/ti/abbbi'
+	dir 'soc/ti/am335x_olimex_som'
+	dir 'soc/ti/beaglebone_capes'
+	dir 'soc/ti/pocketbeagle'
+	dir 'soc/ti/uboot_univ'
+}
+
+dtb_makefile_append () {
+	sed -i -e 's:am335x-boneblack.dtb \\:am335x-boneblack.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
+beaglebone () {
+	#This has to be last...
+	echo "dir: beaglebone/dtbs"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		patch -p1 < "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
+		exit 2
+	fi
+
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
+	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=1
+		cleanup
+	fi
+
+	####
+	#dtb makefile
+	echo "dir: beaglebone/generated"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+
+		device="am335x-boneblack-uboot.dtb" ; dtb_makefile_append
+
+#		device="am335x-boneblack-roboticscape.dtb" ; dtb_makefile_append
+#		device="am335x-boneblack-wireless-roboticscape.dtb" ; dtb_makefile_append
+
+		device="am335x-sancloud-bbe.dtb" ; dtb_makefile_append
+
+		device="am335x-abbbi.dtb" ; dtb_makefile_append
+
+		device="am335x-olimex-som.dtb" ; dtb_makefile_append
+
+		device="am335x-boneblack-wl1835mod.dtb" ; dtb_makefile_append
+
+		device="am335x-boneblack-bbbmini.dtb" ; dtb_makefile_append
+
+		device="am335x-boneblack-bbb-exp-c.dtb" ; dtb_makefile_append
+		device="am335x-boneblack-bbb-exp-r.dtb" ; dtb_makefile_append
+
+		device="am335x-boneblack-audio.dtb" ; dtb_makefile_append
+
+		device="am335x-pocketbeagle.dtb" ; dtb_makefile_append
+
+		device="am335x-bone-uboot-univ.dtb" ; dtb_makefile_append
+		device="am335x-boneblack-uboot-univ.dtb" ; dtb_makefile_append
+		device="am335x-bonegreen-wireless-uboot-univ.dtb" ; dtb_makefile_append
+
+		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
+		git format-patch -1 -o ../patches/beaglebone/generated/
+		exit 2
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0001-auto-generated-capes-add-dtbs-to-makefile.patch"
+	fi
+}
+
 ###
 #backports
-#exit 2
-#dir 'for_upstream_blue'
-#exit 2
+reverts
+drivers
+soc
+beaglebone
+dir 'build/gcc'
 
 packaging () {
 	echo "dir: packaging"

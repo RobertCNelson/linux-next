@@ -1,0 +1,37 @@
+From 02938098a64edc397587ccbfa47866e24478d19a Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 21 Feb 2018 20:23:45 -0600
+Subject: [PATCH] auto generated: capes: add dtbs to makefile
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/Makefile | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index d4af5584a228..eff21fb8639d 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -666,6 +666,19 @@ dtb-$(CONFIG_SOC_AM33XX) += \
+ 	am335x-base0033.dtb \
+ 	am335x-bone.dtb \
+ 	am335x-boneblack.dtb \
++	am335x-bonegreen-wireless-uboot-univ.dtb \
++	am335x-boneblack-uboot-univ.dtb \
++	am335x-bone-uboot-univ.dtb \
++	am335x-pocketbeagle.dtb \
++	am335x-boneblack-audio.dtb \
++	am335x-boneblack-bbb-exp-r.dtb \
++	am335x-boneblack-bbb-exp-c.dtb \
++	am335x-boneblack-bbbmini.dtb \
++	am335x-boneblack-wl1835mod.dtb \
++	am335x-olimex-som.dtb \
++	am335x-abbbi.dtb \
++	am335x-sancloud-bbe.dtb \
++	am335x-boneblack-uboot.dtb \
+ 	am335x-boneblack-wireless.dtb \
+ 	am335x-boneblue.dtb \
+ 	am335x-bonegreen.dtb \
+-- 
+2.16.1
+
